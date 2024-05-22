@@ -5,7 +5,7 @@ BrowserRouter as Router, Routes,
   Route,
   Link,
 } from "react-router-dom";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/homePage";
 import { Home } from "@mui/icons-material";
 
 
@@ -13,15 +13,13 @@ import { Home } from "@mui/icons-material";
 
 const App = () =>{
     return (
-        // <>Welcome to IPO Dashboard!!</>
-     <Router>
-          <div className="App">
-            <Link to="/home">Home</Link>
-          </div>
-          <Routes>
-            <Route path="/home" element={HomePage}></Route>
-          </Routes>
-     </Router>
+      <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Router>
+    </div>
     )
 }
 
