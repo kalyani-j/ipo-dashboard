@@ -8,7 +8,7 @@ const BreadCrumb = () => {
     let pageName = 'Home';
 
     switch(location) {
-        case '/details': 
+        case '/details/:id': 
             pageName = 'Home > Market Watch';
     }
 

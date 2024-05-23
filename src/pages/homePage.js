@@ -2,10 +2,10 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Container } from '@mui/material';
-import IpoTable from '../components/ipo-table';
+import IpoTable from '../components/table/ipo-table';
 
 export default function HomePage() {
-  const theme =   useTheme();
+  const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <>

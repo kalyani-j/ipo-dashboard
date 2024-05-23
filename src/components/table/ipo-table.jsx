@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,9 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ipoData from '../../data/data';
+import ipoData from '../../../assets/data/data';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,6 +34,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function IpoTable() {
+  const [tickerId, setTickerId] = useState('');
+
+  console.log(ipoData)
+
   return (
     <TableContainer component={Paper}>
       <Table
@@ -47,24 +53,30 @@ export default function IpoTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {ipoData.map((ipodata) => (
-            <StyledTableRow key={ipodata.id}>
+          {ipoData.map((data) => (
+            <StyledTableRow key={data.id}>
               <StyledTableCell component="th" scope="row">
-                {ipodata.companyName}
-                <Typography> {ipodata.issueDate}</Typography>
+                <Link
+                  to={`/details/${data.id}`}
+                  onClick={() => setTickerId(`${data.id}`)}
+                >
+                  {' '}
+                  {data.companyName}
+                </Link>
+                <Typography> {data.issueDate}</Typography>
               </StyledTableCell>
               {/* <StyledTableCell>{ipodata.issueDate}</StyledTableCell> */}
               <StyledTableCell align="right">
                 <FontAwesomeIcon icon="fa-solid fa-indian-rupee-sign" />
-                {ipodata.issueSize} Crores
+                {data.issueSize} Crores
               </StyledTableCell>
               <StyledTableCell align="right">
-                {ipodata.priceRange}
+                {`${data.priceRange.min} - ${data.priceRange.max}`}
               </StyledTableCell>
 
               <StyledTableCell align="center">
-                {ipodata.minInvest}
-                <Typography>{ipodata.numberOfLots}</Typography>
+                {data.minInvest}
+                <Typography>{data.numberOfLots}</Typography>
               </StyledTableCell>
             </StyledTableRow>
           ))}
