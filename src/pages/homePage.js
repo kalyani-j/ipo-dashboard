@@ -1,13 +1,17 @@
-import * as React from 'react';
-import Navbar from '../components/navbar';
+import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Container } from '@mui/material';
 import IpoTable from '../components/ipo-table';
 
 export default function HomePage() {
+  const theme =   useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <>
-      <Navbar></Navbar>
-      <h1>This is HomePage</h1>
-      <IpoTable></IpoTable>
+      <Container maxWidth={matches ? 'lg' : 'sm'}>
+        <IpoTable></IpoTable>
+      </Container>
     </>
   );
 }
