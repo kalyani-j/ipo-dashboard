@@ -31,7 +31,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
 export default function IpoTable() {
   return (
     <TableContainer component={Paper}>
@@ -64,8 +63,8 @@ export default function IpoTable() {
               </StyledTableCell>
 
               <StyledTableCell align="center">
-              {ipodata.minInvest}
-              <Typography>{ipodata.numberOfLots}</Typography>
+                {ipodata.minInvest}
+                <Typography>{ipodata.numberOfLots}</Typography>
               </StyledTableCell>
             </StyledTableRow>
           ))}
