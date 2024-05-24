@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,10 +11,12 @@ import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ipoData from '../../../assets/data/data';
+import './ipo-table.less';
+import images from '../../../assets/images/*.jpg';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.warning.light,
     color: theme.palette.common.black,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -34,9 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function IpoTable() {
-  const [tickerId, setTickerId] = useState('');
-
-  console.log(ipoData)
+  console.log(ipoData);
 
   return (
     <TableContainer component={Paper}>
@@ -46,9 +45,10 @@ export default function IpoTable() {
       >
         <TableHead>
           <TableRow>
+            <StyledTableCell></StyledTableCell>
             <StyledTableCell>Company Name/ Issue Date</StyledTableCell>
-            <StyledTableCell align="right">Issue size</StyledTableCell>
-            <StyledTableCell align="right">Price Range</StyledTableCell>
+            <StyledTableCell align="center">Issue size</StyledTableCell>
+            <StyledTableCell align="center">Price Range</StyledTableCell>
             <StyledTableCell align="center">Number of Lots</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -56,27 +56,50 @@ export default function IpoTable() {
           {ipoData.map((data) => (
             <StyledTableRow key={data.id}>
               <StyledTableCell component="th" scope="row">
+                <img src={`${images[data.companyLogo]}`} className="logo" />
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row">
                 <Link
                   to={`/details/${data.id}`}
                   onClick={() => setTickerId(`${data.id}`)}
                 >
                   {' '}
-                  {data.companyName}
+                  <Typography sx={{ fontWeight: 'bold', fontSize: 'large' }}>
+                    {' '}
+                    {data.companyName}
+                  </Typography>
                 </Link>
-                <Typography> {data.issueDate}</Typography>
+
+                <Typography sx={{ fontSize: 'small' }}>
+                  {' '}
+                  {data.issueDate}
+                </Typography>
               </StyledTableCell>
-              {/* <StyledTableCell>{ipodata.issueDate}</StyledTableCell> */}
               <StyledTableCell align="right">
-                <FontAwesomeIcon icon="fa-solid fa-indian-rupee-sign" />
-                {data.issueSize} Crores
+                <Typography sx={{ fontWeight: 'bold', fontSize: 'large' }}>
+                  {' '}
+                  <CurrencyRupeeIcon fontSize="sm" />
+                  {data.issueSize} Crores
+                </Typography>
               </StyledTableCell>
               <StyledTableCell align="right">
-                {`${data.priceRange.min} - ${data.priceRange.max}`}
+                {' '}
+                <Typography sx={{ fontWeight: 'bold', fontSize: 'large' }}>
+                  {' '}
+                  <CurrencyRupeeIcon fontSize="sm" />
+                  {`${data.priceRange.min} - ${data.priceRange.max}`}{' '}
+                </Typography>
               </StyledTableCell>
 
               <StyledTableCell align="center">
-                {data.minInvest}
-                <Typography>{data.numberOfLots}</Typography>
+                <Typography sx={{ fontWeight: 'bold', fontSize: 'large' }}>
+                  {' '}
+                  <CurrencyRupeeIcon fontSize="sm" />
+                  {data.minInvest}{' '}
+                </Typography>
+                <Typography sx={{ fontSize: 'small' }}>
+                  {data.numberOfLots}
+                </Typography>
               </StyledTableCell>
             </StyledTableRow>
           ))}
