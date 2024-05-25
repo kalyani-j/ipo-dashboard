@@ -35,8 +35,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function IpoTable() {
-  console.log(ipoData);
-
   return (
     <TableContainer component={Paper}>
       <Table

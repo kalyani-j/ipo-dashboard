@@ -18,7 +18,6 @@ const IPODetails = () => {
     navigate('/');
   };
 
-  console.log(ipo);
   return (
     <>
       <Container>
